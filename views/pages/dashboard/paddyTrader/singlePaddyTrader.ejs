@@ -1,0 +1,272 @@
+<%- include('../../../partials/head.ejs') %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <%- include('../../../partials/sidebar.ejs') %>
+            </div>
+
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-11">
+                        <div class="card card-body my-5">
+
+                            <div class="card card-body m-3 description">
+
+                                <div class="m-2">
+                                    <span>Name: </span>
+                                    <span>
+                                        <%= paddyTrader.name %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Bangla Name: </span>
+                                    <span>
+                                        <%= paddyTrader.banglaName %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Phone: </span>
+                                    <span>
+                                        <%= paddyTrader.phone %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Village: </span>
+                                    <span>
+                                        <%= paddyTrader.address.village %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Thana: </span>
+                                    <span>
+                                        <%= paddyTrader.address.thana %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>District: </span>
+                                    <span>
+                                        <%= paddyTrader.address.district %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Debit: </span>
+                                    <span class="text-danger">
+                                        <%= paddyTrader.debit + ' tk' %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Credit: </span>
+                                    <span class="text-success">
+                                        <%= paddyTrader.credit + ' tk'%>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Debit Bag: </span>
+                                    <span class="text-danger">
+                                        <%= paddyTrader.debitBag + ' bags' %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Credit Bag: </span>
+                                    <span class="text-success">
+                                        <%= paddyTrader.creditBag + ' bags' %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <% let weight1 = parseInt(paddyTrader.totalPaddySold) %>
+                                    <% let weight2 = (paddyTrader.totalPaddySold - parseInt(paddyTrader.totalPaddySold)) * 40 %>
+                                    <% weight2 = weight2.toFixed(2) %>
+                                    
+                                    <span>Total Paddy Sold: </span>
+                                    <span>
+                                        <%= weight1 + 'mon' + ' ' + weight2 + 'kg' %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>No of Bag Sold: </span>
+                                    <span>
+                                        <%= paddyTrader.totalBagSold + ' bags'%>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Total Amount Sold: </span>
+                                    <span>
+                                        <%= paddyTrader.totalAmountSold + ' tk' %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <button class="mt-3 mr-3 btn btn-sm btn-success" id="more-details">More Details</button>
+                                </div>
+
+                                <div class="transactions m-2" id="transactions">
+                                    <h4 class="text-center mt-5">Create New Transactions</h4>
+                                    <hr>
+
+                                    <form action="/dashboard/singlePaddyTrader/<%= paddyTrader._id %>" method="POST">
+
+                                        <div class="transaction-form">
+
+                                            <div class="form-group">
+                                                <label for="name" class="mt-3">Product Name</label>
+                                                <select class="form-control <%= errors.name ? 'is-invalid' : '' %>" id="name" name="name">
+                                                    <option></option>
+                                                    <% for(let p of product){ %>
+                                                        <option><%= p.name  %></option>
+                                                    <% } %>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    <%= errors.name %>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="quantity" class="mt-3">Quantity</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control <%= errors.quantity ? 'is-invalid' : '' %>"
+                                                    name="quantity" 
+                                                    id="quantity"
+                                                >
+                                                <div class="invalid-feedback">
+                                                    <%= errors.quantity %>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="weight" class="mt-3">Weight</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control <%= errors.weight ? 'is-invalid' : '' %>"
+                                                    name="weight" 
+                                                    id="weight"
+                                                >
+                                                <div class="invalid-feedback">
+                                                    <%= errors.weight %>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="price" class="mt-3">Price</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control <%= errors.price ? 'is-invalid' : '' %>"
+                                                    name="price" 
+                                                    id="price"
+                                                >
+                                                <div class="invalid-feedback">
+                                                    <%= errors.price %>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="debitBag" class="mt-3">Debit Bag</label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control text-danger <%= errors.debitBag ? 'is-invalid' : '' %>"
+                                                name="debitBag" 
+                                                id="debitBag"
+                                            >
+                                            <div class="invalid-feedback">
+                                                <%= errors.debitBag %>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="debit" class="mt-3">Debit</label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control text-danger <%= errors.debit ? 'is-invalid' : '' %>"
+                                                name="debit" 
+                                                id="debit"
+                                            >
+                                            <div class="invalid-feedback">
+                                                <%= errors.debit %>
+                                            </div>
+                                        </div>
+
+                                        <div class="add-transaction mt-3">
+                                            <button class="btn btn-success mt-3 btn-sm">Add Transaction</button>
+                                        </div>
+                                    </form>
+
+                                    <h4 class="text-center mt-5">All Transactions</h4>
+                                    <hr>
+
+                                    <div class="all-transactions">
+
+                                        <% if(paddyTrader.transactions.length === 0){ %>
+                                            <div class="text-center text-muted">
+                                                <p>There is no transactions available rigth now</p>
+                                            </div>
+                                        <% }else{ %>
+                                            <% let id = 1 %>
+                                            
+                                            <div style="overflow-x:auto;">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>তারিখ</th>
+                                                            <th>নাম</th>
+                                                            <th>পরিমান</th>
+                                                            <th>ওজন</th>
+                                                            <th>দাম</th>
+                                                            <th>ব্যাগ খরচ</th>
+                                                            <th>ব্যাগ জমা</th>
+                                                            <th>খরচ</th>
+                                                            <th>জমা</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <div class="col-sm-3" style=" width: 200px;">
+                                                            <% for (let trans of paddyTrader.transactions.reverse()){ %>
+                                                                <tr scope="row">
+                                                                    <% let weight1 = parseInt(trans.weight) %>
+                                                                    <% let weight2 = (trans.weight - parseInt(trans.weight)) * 40 %>
+                                                                    <% weight2 = weight2.toFixed(2) %>
+
+                                                                    <th scope="row"><%= id %></th>
+                                                                    <td><%= trans.date %></td>
+                                                                    <td><%= trans.banglaName %></td>
+                                                                    <td><%= trans.quantity + ' bags' %></td>
+                                                                    <td><%= weight1 + 'mon' + ' ' + weight2 + 'kg' %></td>
+                                                                    <td><%= trans.price + ' tk'%></td>
+                                                                    <td class="text-danger"><%= trans.debitBag + ' bags' %></td>
+                                                                    <td class="text-success"><%= trans.creditBag + ' bags' %></td>
+                                                                    <td class="text-danger"><%= trans.debit + ' tk' %></td>
+                                                                    <td class="text-success"><%= trans.credit + ' tk' %></td>
+                                                                    
+                                                                    <% id++ %>
+                                                                </tr>
+                                                            <% } %>
+                                                        </div>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('../../../partials/footer.ejs') %>    
+    </body>
+</html>

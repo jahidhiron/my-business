@@ -1,0 +1,128 @@
+<%- include('../../partials/head.ejs') %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <%- include('../../partials/sidebar.ejs') %>
+            </div>
+
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-11">
+                        <div class="card card-body my-5">
+
+                            <% if(searchResult){ %>
+                                <div style="overflow-x:auto;">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Phone</th>
+                                                <th>Debit</th>
+                                                <th>Credit</th>
+                                                <th>Details</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% if(customer.length > 0){ %>
+                                                <% for (let c of customer){ %>
+                                                    <div class="col-sm-3" style=" width: 200px;">
+                                                        <tr scope="row">
+                                                            <% let id = 1 %>
+                                                            <th scope="row"><%= id %></th>
+                                                            <td><%= c.name %></td>
+                                                            <td><%= c.phone %></td>
+                                                            <td class="text-danger"><%= c.debit %></td>
+                                                            <td class="text-success"><%= c.credit %></td>
+                                                            <td><a href="/dashboard/singleCustomer/<%= c._id %>" target="_blank" >details</a></td>
+                                                            <% id++ %>
+                                                        </tr>
+                                                    </div>
+                                                <% } %>
+                                            <% } %>
+
+                                            <% if(labour.length > 0){ %>
+                                                <% for (let l of labour){ %>
+                                                    <div class="col-sm-3" style=" width: 200px;">
+                                                        <tr scope="row">
+                                                            <% let id = 1 %>
+                                                            <th scope="row"><%= id %></th>
+                                                            <td><%= l.name %></td>
+                                                            <td><%= l.phone %></td>
+                                                            <td class="text-danger"><%= l.debit %></td>
+                                                            <td class="text-success"><%= l.credit %></td>
+                                                            <td><a href="/dashboard/singleLabour/<%= l._id %>" target="_blank" >details</a></td>
+                                                            <% id++ %>
+                                                        </tr>
+                                                    </div>
+                                                <% } %>
+                                            <% } %>
+
+                                            <% if(staff.length > 0){ %>
+                                                <% for (let l of staff){ %>
+                                                    <div class="col-sm-3" style=" width: 200px;">
+                                                        <tr scope="row">
+                                                            <% let id = 1 %>
+                                                            <th scope="row"><%= id %></th>
+                                                            <td><%= l.name %></td>
+                                                            <td><%= l.phone %></td>
+                                                            <td class="text-danger"><%= l.debit %></td>
+                                                            <td class="text-success"><%= l.credit %></td>
+                                                            <td><a href="/dashboard/singleStaff/<%= l._id %>" target="_blank" >details</a></td>
+                                                            <% id++ %>
+                                                        </tr>
+                                                    </div>
+                                                <% } %>
+                                            <% } %>
+
+                                            <% if(paddyTrader.length > 0){ %>
+                                                <% for (let p of paddyTrader){ %>
+                                                    <div class="col-sm-3" style=" width: 200px;">
+                                                        <tr scope="row">
+                                                            <% let id = 1 %>
+                                                            <th scope="row"><%= id %></th>
+                                                            <td><%= p.name %></td>
+                                                            <td><%= p.phone %></td>
+                                                            <td class="text-danger"><%= p.debit %></td>
+                                                            <td class="text-success"><%= p.credit %></td>
+                                                            <td><a href="/dashboard/singlePaddyTrader/<%= p._id %>" target="_blank" >details</a></td>
+                                                            <% id++ %>
+                                                        </tr>
+                                                    </div>
+                                                <% } %>
+                                            <% } %>
+
+                                            <% if(bagTrader.length > 0){ %>
+                                                <% for (let b of bagTrader){ %>
+                                                    <div class="col-sm-3" style=" width: 200px;">
+                                                        <tr scope="row">
+                                                            <% let id = 1 %>
+                                                            <th scope="row"><%= id %></th>
+                                                            <td><%= b.name %></td>
+                                                            <td><%= b.phone %></td>
+                                                            <td class="text-danger"><%= b.debit %></td>
+                                                            <td class="text-success"><%= b.credit %></td>
+                                                            <td><a href="/dashboard/singleBagTrader/<%= b._id %>" target="_blank" >details</a></td>
+                                                            <% id++ %>
+                                                        </tr>
+                                                    </div>
+                                                <% } %>
+                                            <% } %>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            <% } %>
+                                
+                            <% if(!searchResult) { %>
+                                <h4 class="text-center mt-2 mb-5" style="color: #888;">Sorry ! Nothing Found.</h4>
+                            <% } %>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <%- include('../../partials/footer.ejs') %>
+    </body>
+</html>

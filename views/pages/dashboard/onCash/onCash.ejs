@@ -1,0 +1,173 @@
+<%- include('../../../partials/head.ejs') %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <%- include('../../../partials/sidebar.ejs') %>
+            </div>
+
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-11">
+                        <div class="card card-body my-5">
+
+                            <div class="card card-body m-3 description">
+
+                                <div class="m-2">
+                                    <span>Total Sell: </span>
+                                    <span>
+                                        <%= onCash.totalSell + ' tk' %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Total Bag: </span>
+                                    <span>
+                                        <%= onCash.totalBag + ' bags' %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Total Profit: </span>
+                                    <span>
+                                        <%= onCash.totalProfit.toFixed(2) + ' tk' %>
+                                    </span>
+                                </div>
+
+
+                                <div class="m-2">
+                                    <button class="mt-3 mr-3 btn btn-sm btn-success" id="more-details">More Details</button>
+                                </div>
+
+                                <div class="transactions m-2" id="transactions">
+                                    <h4 class="text-center mt-5">Create New Transactions</h4>
+                                    <hr>
+
+                                    <form action="/dashboard/onCash" method="POST">
+
+                                        <div class="transaction-form">
+
+                                            <div class="form-group">
+                                                <label for="name" class="mt-3">Product Name</label>
+                                                <select class="form-control <%= errors.name ? 'is-invalid' : '' %>" id="name" name="name">
+                                                    <option></option>
+                                                    <% for(let r of riceStock){ %>
+                                                        <option><%= r.name  %></option>
+                                                    <% } %>
+
+                                                    <% for(let o of otherStock){ %>
+                                                        <option><%= o.name  %></option>
+                                                    <% } %>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    <%= errors.name %>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="quantity" class="mt-3">Quantity</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control <%= errors.quantity ? 'is-invalid' : '' %>"
+                                                    name="quantity" 
+                                                    id="quantity"
+                                                >
+                                                <div class="invalid-feedback">
+                                                    <%= errors.quantity %>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="weight" class="mt-3">Weight</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control <%= errors.weight ? 'is-invalid' : '' %>"
+                                                    name="weight" 
+                                                    id="weight"
+                                                >
+                                                <div class="invalid-feedback">
+                                                    <%= errors.weight %>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="price" class="mt-3">Price</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control <%= errors.price ? 'is-invalid' : '' %>"
+                                                    name="price" 
+                                                    id="price"
+                                                >
+                                                <div class="invalid-feedback">
+                                                    <%= errors.price %>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="add-transaction mt-3">
+                                            <button class="btn btn-success mt-3 btn-sm">Add Transaction</button>
+                                        </div>
+                                    </form>
+
+                                    <h4 class="text-center mt-5">All Transactions</h4>
+                                    <hr>
+
+                                    <div class="all-transactions">
+
+                                        <% if(onCash.transactions.length === 0){ %>
+                                            <div class="text-center text-muted">
+                                                <p>There is no transactions available rigth now</p>
+                                            </div>
+                                        <% }else{ %>
+                                            <% let id = 1 %>
+                                            
+                                            <div style="overflow-x:auto;">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>তারিখ</th>
+                                                            <th>নাম</th>
+                                                            <th>দাম</th>
+                                                            <th>পরিমান</th>
+                                                            <th>মোট দাম</th>
+                                                            <th>লাভ</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <div class="col-sm-3" style=" width: 200px;">
+                                                            <% for (let trans of onCash.transactions.reverse()){ %>
+                                                                <tr scope="row">
+                                                                    <% let cost = trans.cost %>
+                                                                    <% cost = cost.toFixed(2) %>
+
+                                                                    <% let profit = trans.profit %>
+                                                                    <% profit = profit.toFixed(2) %>
+
+                                                                    <th scope="row"><%= id %></th>
+                                                                    <td><%= trans.date %></td>
+                                                                    <td><%= trans.name %></td>
+                                                                    <td><%= trans.price + ' tk'%></td>
+                                                                    <td><%= trans.quantity + ' bag'%></td>
+                                                                    <td><%= cost + ' tk' %></td>
+                                                                    <td><%= profit + ' tk' %></td>
+                                                                    
+                                                                    <% id++ %>
+                                                                </tr>
+                                                            <% } %>
+                                                        </div>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('../../../partials/footer.ejs') %>    
+    </body>
+</html>

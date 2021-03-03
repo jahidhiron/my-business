@@ -1,0 +1,192 @@
+<%- include('../../partials/head.ejs') %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <%- include('../../partials/sidebar.ejs') %>
+            </div>
+
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-11">
+                        <div class="card card-body my-5">
+                            <h4 class="mt-3 mb-3">
+                                Profit
+                            </h4>
+
+                            <div class="calculation">
+                                <form action="/dashboard/profit" method="get">
+
+                                    <div class="form-group">
+                                        <label for="startDate" class="mt-3">Start Date</label>
+                                        <input type="date" class="form-control"
+                                            name="startDate" id="startDate">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="endDate" class="mt-3">End Date</label>
+                                        <input type="date" class="form-control"
+                                            name="endDate" id="endDate">
+                                    </div>
+
+                                    <input type="submit" value="Profit" class="btn btn-success btn-sm mt-4 mb-3">
+                                </form>
+                            </div>
+
+                            <% if(totalProfit){ %>
+                                <h4 class="my-3 text-center"><span class="text-success"><%= totalProfit.toFixed(0) %></span><span><%= ' tk profit by ' + totalDay + ' days' %></span></h4>
+                            <% } %>
+                        </div>
+
+                        <div class="card card-body my-5">
+                            <h4 class="mt-3 mb-3">
+                                All Cost
+                            </h4>
+
+                            <div class="calculation">
+                                <form action="/dashboard/allCost" method="get">
+
+                                    <div class="form-group">
+                                        <label for="startDate" class="mt-3">Start Date</label>
+                                        <input type="date" class="form-control"
+                                            name="startDate" id="startDate">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="endDate" class="mt-3">End Date</label>
+                                        <input type="date" class="form-control"
+                                            name="endDate" id="endDate">
+                                    </div>
+
+                                    <input type="submit" value="All Cost" class="btn btn-success btn-sm mt-4 mb-3">
+                                </form>
+                            </div>
+
+                            <% if(allCost){ %>
+                                <h4 class="my-3 text-center"><span class="text-success"><%= allCost.toFixed(0) %></span><span><%= ' tk profit by ' + totalDay + ' days' %></span></h4>
+                            <% } %>
+                        </div>
+
+                        <div class="card card-body my-5">
+                            <h4 class="mt-3 mb-3">
+                                Labour Cost
+                            </h4>
+
+                            <div class="calculation">
+                                <form action="/dashboard/labourCost" method="get">
+
+                                    <div class="form-group">
+                                        <label for="startDate" class="mt-3">Start Date</label>
+                                        <input type="date" class="form-control"
+                                            name="startDate" id="startDate">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="endDate" class="mt-3">End Date</label>
+                                        <input type="date" class="form-control"
+                                            name="endDate" id="endDate">
+                                    </div>
+
+                                    <input type="submit" value="Labour Cost" class="btn btn-success btn-sm mt-4 mb-3">
+                                </form>
+                            </div>
+
+                            <% if(labourCost){ %>
+                                <h4 class="my-3 text-center"><span class="text-success"><%= labourCost.toFixed(0) %></span><span><%= ' tk cost by ' + totalDay + ' days' %></span></h4>
+                            <% } %>
+                        </div>
+
+                        <div class="card card-body my-5">
+                            <h4 class="mt-3 mb-3">
+                                Transport Cost
+                            </h4>
+
+                            <div class="calculation">
+                                <form action="/dashboard/transportCost" method="get">
+
+                                    <div class="form-group">
+                                        <label for="startDate" class="mt-3">Start Date</label>
+                                        <input type="date" class="form-control"
+                                            name="startDate" id="startDate">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="endDate" class="mt-3">End Date</label>
+                                        <input type="date" class="form-control"
+                                            name="endDate" id="endDate">
+                                    </div>
+
+                                    <input type="submit" value="Transport Cost" class="btn btn-success btn-sm mt-4 mb-3">
+                                </form>
+                            </div>
+
+                            <% if(transportCost){ %>
+                                <h4 class="my-3 text-center"><span class="text-success"><%= transportCost.toFixed(0) %></span><span><%= ' tk cost by ' + totalDay + ' days' %></span></h4>
+                            <% } %>
+                        </div>
+
+                        <div class="card card-body my-5">
+                            <h4 class="mt-3 mb-3">
+                                Mill Cost
+                            </h4>
+
+                            <div class="calculation">
+                                <form action="/dashboard/millCost" method="get">
+
+                                    <div class="form-group">
+                                        <label for="startDate" class="mt-3">Start Date</label>
+                                        <input type="date" class="form-control"
+                                            name="startDate" id="startDate">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="endDate" class="mt-3">End Date</label>
+                                        <input type="date" class="form-control"
+                                            name="endDate" id="endDate">
+                                    </div>
+
+                                    <input type="submit" value="Mill Cost" class="btn btn-success btn-sm mt-4 mb-3">
+                                </form>
+                            </div>
+
+                            <% if(millCost){ %>
+                                <h4 class="my-3 text-center"><span class="text-success"><%= millCost.toFixed(0) %></span><span><%= ' tk cost by ' + totalDay + ' days' %></span></h4>
+                            <% } %>
+                        </div>
+
+                        <div class="card card-body my-5">
+                            <h4 class="mt-3 mb-3">
+                                Extra Cost
+                            </h4>
+
+                            <div class="calculation">
+                                <form action="/dashboard/extraCost" method="get">
+
+                                    <div class="form-group">
+                                        <label for="startDate" class="mt-3">Start Date</label>
+                                        <input type="date" class="form-control"
+                                            name="startDate" id="startDate">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="endDate" class="mt-3">End Date</label>
+                                        <input type="date" class="form-control"
+                                            name="endDate" id="endDate">
+                                    </div>
+
+                                    <input type="submit" value="Extra Cost" class="btn btn-success btn-sm mt-4 mb-3">
+                                </form>
+                            </div>
+
+                            <% if(extraCost){ %>
+                                <h4 class="my-3 text-center"><span class="text-success"><%= extraCost.toFixed(0) %></span><span><%= ' tk cost by ' + totalDay + ' days' %></span></h4>
+                            <% } %>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        <%- include('../../partials/footer.ejs') %>
+    </body>
+</html>

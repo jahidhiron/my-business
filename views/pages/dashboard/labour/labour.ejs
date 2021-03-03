@@ -1,0 +1,66 @@
+<%- include('../../../partials/head.ejs') %>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <%- include('../../../partials/sidebar.ejs') %>
+        </div>
+
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-11">
+                    <div class="card card-body my-5">
+                        <div class="text-muted" style="margin: right;">
+                            <a href="/dashboard/newLabour" class="btn btn-success btn-sm mb-4">Create New Labour</a>
+                        </div>
+
+                        <h4 class="mt-3 mb-4">
+                            <%= title.split('|')[0] %>
+                        </h4>
+
+                        <% if(labour.length === 0){ %>
+                            <div class="text-center text-muted">
+                                <p>There is no labour available rigth now</p>
+                            </div>
+                        <% }else{ %>
+                            <% let id = 1 %>
+                            <div style="overflow-x:auto;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>নাম</th>
+                                            <th>ফোন</th>
+                                            <th>খরচ</th>
+                                            <th>জমা</th>
+                                            <th>Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for (let l of labour){ %>
+                                            <div class="col-sm-3" style=" width: 200px;">
+                                                <tr scope="row">
+                                                    <th scope="row"><%= id %></th>
+                                                    <td><%= l.banglaName %></td>
+                                                    <td><%= l.phone %></td>
+                                                    <td class="text-danger"><%= l.debit %></td>
+                                                    <td class="text-success"><%= l.credit %></td>
+                                                    <td><a href="/dashboard/singleLabour/<%= l._id %>" target="_blank" >details</a></td>
+                                                    <% id++ %>
+                                                </tr>
+                                            </div>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../../../partials/footer.ejs') %>
+</body>
+</html>

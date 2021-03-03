@@ -1,0 +1,49 @@
+/* global style */
+/* ---------------------------------------- */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html, body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    min-height: 100%;
+    background-color: #eee;
+}
+footer{
+    min-height: 80px;
+    background-color: #212529;
+    color: #fff;
+    text-align: center;
+}
+/* ---------------------------------------- */
+/* end of global style */
+
+/* ================================================================== */
+
+
+/* nav */
+/* ---------------------------------------- */
+
+.nav-link{
+    font-size: 1.05em;
+}
+.navbar-brand{
+    margin-right: 40px;
+}
+/* ---------------------------------------- */
+/* end of nav */
+
+/* ================================================================== */
+
+
+/* conatiner */
+/* ---------------------------------------- */
+.my-container{
+    min-height: 600px;
+}
+/* ---------------------------------------- */
+/* end conatiner */
+
+/* ================================================================== */

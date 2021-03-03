@@ -1,0 +1,239 @@
+<%- include('../../partials/head.ejs') %>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <%- include('../../partials/sidebar.ejs') %>
+        </div>
+
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-11">
+                    <div class="card card-body my-5">
+                        <div id="curve_chart" style="width: 900px; height: 500px"></div>
+                    </div>
+
+                    <div class="card card-body my-5">
+                        <div class="description">
+
+                            <h4 class="text-center mb-5">Business Short Summary</h4>
+
+                            <div style="overflow-x:auto;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>বিবরণ</th>
+                                            <th>টাকার পরিমান</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr scope="row">
+                                            <th>1</th>
+                                            <th>ইসলামপুর বাজারের  বকেয়া</th>
+                                            <td><%= islampurCustomerDue.toFixed(2) + ' tk' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>2</th>
+                                            <th>ধর্মকুড়া বাজারের  বকেয়া</th>
+                                            <td><%= dharmakuraCustomerDue.toFixed(2) + ' tk' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>3</th>
+                                            <th>মুখশিমলা বাজারের  বকেয়া</th>
+                                            <td><%= mukhsimolaCustomerDue.toFixed(2) + ' tk' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>4</th>
+                                            <th>মলমগঞ্জ বাজারের  বকেয়া</th>
+                                            <td><%= molomgongCustomerDue.toFixed(2) + ' tk' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>5</th>
+                                            <th>মিলবাজার বাজারের  বকেয়া</th>
+                                            <td><%= milbazarCustomerDue.toFixed(2) + ' tk' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>6</th>
+                                            <th>বেলতলী বাজারের  বকেয়া</th>
+                                            <td><%= beltoliCustomerDue.toFixed(2) + ' tk' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>7</th>
+                                            <th>দেওনগঞ্জ বাজারের  বকেয়া</th>
+                                            <td><%= dewngongCustomerDue.toFixed(2) + ' tk' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>8</th>
+                                            <th>দিগলকান্দি বাজারের  বকেয়া</th>
+                                            <td><%= digolkandiCustomerDue.toFixed(2) + ' tk' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>9</th>
+                                            <th>মোশারফগঞ্জ বাজারের  বকেয়া</th>
+                                            <td><%= mosarofgongCustomerDue.toFixed(2) + ' tk' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>10</th>
+                                            <th>গুঠাইল বাজারের  বকেয়া</th>
+                                            <td><%= guthailCustomerDue.toFixed(2) + ' tk' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>11</th>
+                                            <th>জরলতলা বাজারের  বকেয়া</th>
+                                            <td><%= jaroltolaCustomerDue.toFixed(2) + ' tk' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>12</th>
+                                            <th>আমতলা বাজারের  বকেয়া</th>
+                                            <td><%= amtolaCustomerDue.toFixed(2) + ' tk' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>13</th>
+                                            <th>পচাবহলা বাজারের  বকেয়া</th>
+                                            <td><%= pochaboholaCustomerDue.toFixed(2) + ' tk' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>14</th>
+                                            <th>মেলান্দহ বাজারের  বকেয়া</th>
+                                            <td><%= melandohoCustomerDue.toFixed(2) + ' tk' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>15</th>
+                                            <th>মোট বকেয়া</th>
+                                            <td><%= allDue.toFixed(2) + ' tk' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>16</th>
+                                            <th>মোট ধান</th>
+                                            <td><%= paddyQuantity + ' bag' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <% let weight1 = parseInt(paddyWeight) %>
+                                            <% let weight2 = (paddyWeight - parseInt(paddyWeight)) * 40 %>
+                                            <% weight2 = weight2.toFixed(2) %>
+                                            
+                                            <th>17</th>
+                                            <th>মোট ধানের ওজন</th>
+                                            <td><%= weight1 + ' mon ' + weight2 + ' kg' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>18</th>
+                                            <th>মোট ধানের দাম</th>
+                                            <td><%= paddyPrice.toFixed(2) + ' tk' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>19</th>
+                                            <th>২৫ কেজি চাল</th>
+                                            <td><%= rice25Quantity + ' bag' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>20</th>
+                                            <th>৫০ কেজি চাল</th>
+                                            <td><%= rice50Quantity + ' bag' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>21</th>
+                                            <th>মোট চাল</th>
+                                            <td><%= riceTotalQuantity + ' bag' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>22</th>
+                                            <th>মোট চালের দাম</th>
+                                            <td><%= riceTotalPrice.toFixed(2) + ' tk' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>19</th>
+                                            <th>মোট অগ্রিম খরচ</th>
+                                            <td><%= advancedMoney.toFixed(2) + ' tk' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>20</th>
+                                            <th>মোট দেনা</th>
+                                            <td><%= buyingDue.toFixed(2) + ' tk' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>21</th>
+                                            <th>মোট স্টোক</th>
+                                            <td><%= totalPriceOfAllProduct.toFixed(2) + ' tk' %></td>
+                                        </tr>
+
+                                        <tr scope="row">
+                                            <th>22</th>
+                                            <th>মোট বিনিয়োগ</th>
+                                            <td><%= totalInvest.toFixed(2) + ' tk' %></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <input type="text" style="display: none;" id="sellByDate" value="<%= sellByDate %>">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<%- include('../../partials/footer.ejs') %>
+
+<script type="text/javascript">
+    let sellByDate = document.getElementById('sellByDate').value;
+
+    sellByDate = sellByDate.split(',');
+    let towDArray = [];
+    let length = sellByDate.length
+    for(let i = 0; i < length; i += 2){
+        if(i === 0){
+            towDArray.push([sellByDate[i], sellByDate[i+1]]);
+        }
+        towDArray.push([sellByDate[i], parseInt(sellByDate[i+1])]);
+    }
+
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    
+
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable(towDArray);
+
+      var options = {
+        title: 'Company Performance',
+        curveType: 'function',
+        legend: { position: 'bottom' }
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+      chart.draw(data, options);
+    }
+</script>
+
+</body>
+</html>

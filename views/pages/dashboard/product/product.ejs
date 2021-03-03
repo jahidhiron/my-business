@@ -1,0 +1,64 @@
+<%- include('../../../partials/head.ejs') %>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <%- include('../../../partials/sidebar.ejs') %>
+        </div>
+
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-11">
+                    <div class="card card-body my-5">
+                        <div class="text-muted" style="margin: right;">
+                            <a href="/dashboard/newProduct" class="btn btn-success btn-sm mb-4">Create New Product</a>
+                        </div>
+
+                        <h4 class="mt-3 mb-4">
+                            <%= title.split('|')[0] %>
+                        </h4>
+
+                        <% if(product.length === 0){ %>
+                            <div class="text-center text-muted">
+                                <p>There is no product available rigth now</p>
+                            </div>
+                        <% }else{ %>
+                            <% let id = 1 %>
+                            <div style="overflow-x:auto;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>English Name</th>
+                                            <th>Bangla Name</th>
+                                            <th>Type</th>
+                                            <th>First Created At</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for (let p of product){ %>
+                                            <div class="col-sm-3" style=" width: 200px;">
+                                                <tr scope="row">
+                                                    <th scope="row"><%= id %></th>
+                                                    <td><%= p.name %></td>
+                                                    <td><%= p.banglaName %></td>
+                                                    <td><%= p.type %></td>
+                                                    <td><%= p.date %></td>
+                                                    <% id++ %>
+                                                </tr>
+                                            </div>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../../../partials/footer.ejs') %>
+</body>
+</html>

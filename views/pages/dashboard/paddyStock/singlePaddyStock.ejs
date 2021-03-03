@@ -1,0 +1,154 @@
+<%- include('../../../partials/head.ejs') %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <%- include('../../../partials/sidebar.ejs') %>
+            </div>
+
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-11">
+                        <div class="card card-body my-5">
+
+                            <div class="card card-body m-3 description">
+
+                                <div class="m-2">
+                                    <span>Name: </span>
+                                    <span>
+                                        <%= paddyStock.name %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Bangla Name: </span>
+                                    <span>
+                                        <%= paddyStock.banglaName %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Average Price: </span>
+                                    <span>
+                                        <% let avgPrice = parseFloat(paddyStock.avgPrice) %>
+                                        <% avgPrice = avgPrice.toFixed(2) %>
+                                        <%= avgPrice + ' tk' %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Total Quantity: </span>
+                                    <span>
+                                        <%= paddyStock.totalQuantity + ' bags' %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Total Weight: </span>
+                                    <span>
+                                        <% let weight1 = parseInt(paddyStock.totalWeight) %>
+                                        <% let weight2 = (paddyStock.totalWeight - parseInt(paddyStock.totalWeight)) * 40 %>
+                                        <% weight2 = weight2.toFixed(2) %>
+                                        <td><%= weight1 + 'mon ' + ' ' + weight2 + 'kg' %></td>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Net Price: </span>
+                                    <span>
+                                        <% let price = parseFloat(paddyStock.netPrice) %>
+                                        <% price = price.toFixed(2) %>
+                                        <%= price + ' tk' %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <button class="mt-3 mr-3 btn btn-sm btn-success" id="more-details">More Details</button>
+                                </div>
+
+                                <div class="transactions m-2" id="transactions">
+                                    
+                                    <h4 class="mt-5 text-center">Paddy to Rice</h4>
+                                    <hr>
+
+                                    <form action="/dashboard/singlePaddyStock/<%= paddyStock._id %>" method="POST">
+
+                                        <div class="transaction-form">
+
+                                            <div class="form-group">
+                                                <label for="quantity" class="mt-3">Quantity</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control <%= errors.quantity ? 'is-invalid' : '' %>"
+                                                    name="quantity" 
+                                                    id="quantity"
+                                                >
+                                                <div class="invalid-feedback">
+                                                    <%= errors.quantity %>
+                                                </div>
+                                            </div>
+    
+                                        </div>
+
+                                        <div class="add-transaction mt-3">
+                                            <button class="btn btn-success mt-3 btn-sm">Add Transaction</button>
+                                        </div>
+                                    </form>
+
+                                    <h4 class="mt-5 text-center">All Transactions</h4>
+                                    <hr>
+
+                                    <div class="all-transactions">
+
+                                        <% if(paddyStock.transactions.length === 0){ %>
+                                            <div class="text-center text-muted">
+                                                <p>There is no transactions available rigth now</p>
+                                            </div>
+                                        <% }else{ %>
+                                            <% let id = 1 %>
+                                            <div style="overflow-x:auto;">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>Quantity</th>
+                                                            <th>Weight</th>
+                                                            <th>Total Price</th>
+                                                            <th>Date</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <div class="col-sm-3" style=" width: 200px;">
+                                                            <% for (let trans of paddyStock.transactions){ %>
+                                                                <tr scope="row">
+                                                                    <% let totalPrice = parseFloat(trans.totalPrice) %>
+                                                                    <% totalPrice = totalPrice.toFixed(2) %>
+
+                                                                    <% let weight1 = parseInt(trans.weight) %>
+                                                                    <% let weight2 = (trans.weight - parseInt(trans.weight)) * 40 %>
+                                                                    <% weight2 = weight2.toFixed(2) %>
+
+                                                                    <th scope="row"><%= id %></th>
+                                                                    <td><%= trans.quantity %></td>
+                                                                    <td><%= weight1 + 'mon' + ' ' + weight2 + 'kg' %></td>
+                                                                    <td><%= totalPrice + ' tk' %></td>
+                                                                    <td><%= trans.date %></td>
+                                                                    <% id++ %>
+                                                                </tr>
+                                                            <% } %>
+                                                        </div>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('../../../partials/footer.ejs') %>    
+    </body>
+</html>

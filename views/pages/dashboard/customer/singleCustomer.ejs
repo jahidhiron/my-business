@@ -1,0 +1,236 @@
+<%- include('../../../partials/head.ejs') %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <%- include('../../../partials/sidebar.ejs') %>
+            </div>
+
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-11">
+                        <div class="card card-body my-5">
+
+                            <div class="card card-body m-3 description">
+
+                                <div class="m-2">
+                                    <span>Name: </span>
+                                    <span>
+                                        <%= customer.name %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Bangla Name: </span>
+                                    <span>
+                                        <%= customer.banglaName %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Phone: </span>
+                                    <span>
+                                        <%= customer.phone %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Village: </span>
+                                    <span>
+                                        <%= customer.address.village %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Thana: </span>
+                                    <span>
+                                        <%= customer.address.thana %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Area: </span>
+                                    <span>
+                                        <%= customer.area %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>District: </span>
+                                    <span>
+                                        <%= customer.address.district %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Debit: </span>
+                                    <span class="text-danger">
+                                        <%= customer.debit + ' tk' %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Credit: </span>
+                                    <span class="text-success">
+                                        <%= customer.credit + ' tk'%>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>No. of Bags Buy: </span>
+                                    <span>
+                                        <%= customer.totalBag + ' bags' %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Total Buy: </span>
+                                    <span>
+                                        <%= customer.totalBuy + ' tk' %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Total Profit: </span>
+                                    <span>
+                                        <% let totalProfit = customer.totalProfit %>
+                                        <% totalProfit = totalProfit.toFixed(2) %>
+                                        <%= totalProfit + ' tk'%>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <button class="mt-3 mr-3 btn btn-sm btn-success" id="more-details">More Details</button>
+                                </div>
+
+                                <div class="transactions m-2" id="transactions">
+                                    <h4 class="text-center mt-5">Create New Transactions</h4>
+                                    <hr>
+
+                                    <form action="/dashboard/singleCustomer/<%= customer._id %>" method="POST">
+
+                                        <div class="transaction-form">
+
+                                            <div class="form-group">
+                                                <label for="name" class="mt-3">Product Name</label>
+                                                <select class="form-control <%= errors.name ? 'is-invalid' : '' %>" id="name" name="name">
+                                                    <option></option>
+                                                    <% for(let r of riceStock){ %>
+                                                        <option><%= r.name  %></option>
+                                                    <% } %>
+
+                                                    <% for(let o of otherStock){ %>
+                                                        <option><%= o.name  %></option>
+                                                    <% } %>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    <%= errors.name %>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="quantity" class="mt-3">Quantity</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control <%= errors.quantity ? 'is-invalid' : '' %>"
+                                                    name="quantity" 
+                                                    id="quantity"
+                                                >
+                                                <div class="invalid-feedback">
+                                                    <%= errors.quantity %>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="price" class="mt-3">Price</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control <%= errors.price ? 'is-invalid' : '' %>"
+                                                    name="price" 
+                                                    id="price"
+                                                >
+                                                <div class="invalid-feedback">
+                                                    <%= errors.price %>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="credit" class="mt-3">Credit</label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control <%= errors.credit ? 'is-invalid' : '' %>"
+                                                name="credit" 
+                                                id="credit"
+                                            >
+                                            <div class="invalid-feedback">
+                                                <%= errors.credit %>
+                                            </div>
+                                        </div>
+
+                                        <div class="add-transaction mt-3">
+                                            <button class="btn btn-success mt-3 btn-sm">Add Transaction</button>
+                                        </div>
+                                    </form>
+
+                                    <h4 class="text-center mt-5">All Transactions</h4>
+                                    <hr>
+
+                                    <div class="all-transactions">
+
+                                        <% if(customer.transactions.length === 0){ %>
+                                            <div class="text-center text-muted">
+                                                <p>There is no transactions available rigth now</p>
+                                            </div>
+                                        <% }else{ %>
+                                            <% let id = 1 %>
+                                            
+                                            <div style="overflow-x:auto;">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>তারিখ</th>
+                                                            <th>নাম</th>
+                                                            <th>দাম</th>
+                                                            <th>পরিমান</th>
+                                                            <th>জমা</th>
+                                                            <th>খরচ</th>
+                                                            <th>লাভ</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <div class="col-sm-3" style=" width: 200px;">
+                                                            <% for (let trans of customer.transactions.reverse()){ %>
+                                                                <tr scope="row">
+                                                                    <% let profit = trans.profit %>
+                                                                    <% profit = profit.toFixed(2) %>
+
+                                                                    <th scope="row"><%= id %></th>
+                                                                    <td><%= trans.date %></td>
+                                                                    <td><%= trans.name %></td>
+                                                                    <td><%= trans.price + ' tk'%></td>
+                                                                    <td><%= trans.quantity + ' bags' %></td>
+                                                                    <td class="text-danger"><%= trans.debit + ' tk' %></td>
+                                                                    <td class="text-success"><%= trans.credit + ' tk' %></td>
+                                                                    <td><%= profit + ' tk' %></td>
+                                                                    
+                                                                    <% id++ %>
+                                                                </tr>
+                                                            <% } %>
+                                                        </div>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('../../../partials/footer.ejs') %>    
+    </body>
+</html>

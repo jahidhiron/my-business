@@ -1,0 +1,46 @@
+<%- include('../../../partials/head.ejs') %>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <%- include('../../../partials/sidebar.ejs') %>
+            </div>
+
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-11">
+                        <div class="card card-body my-5">
+                            <h4 class="mt-3 mb-3">
+                                <%= title.split('|')[0] %>
+                            </h4>
+                            
+                            <div class="paddyStock">
+                                <form action="/dashboard/newPaddyStock" method="POST">
+
+                                    <div class="form-group">
+                                        <label for="name" class="mt-3">Select Product</label>
+                                        <select class="form-control <%= errors.name ? 'is-invalid' : '' %>" id="name" name="name">
+                                            <option></option>
+                                            <% for(let p of product){ %>
+                                                <option><%= p.name %></option>
+                                            <% } %>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            <%= errors.name %>
+                                        </div>
+                                    </div>
+
+                                    <input type="submit" value="Create New Paddy Stock" class="btn btn-success btn-sm mt-4 mb-3">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <%- include('../../../partials/footer.ejs') %>
+        </body>
+        </html>

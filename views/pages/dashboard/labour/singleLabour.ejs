@@ -1,0 +1,162 @@
+<%- include('../../../partials/head.ejs') %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <%- include('../../../partials/sidebar.ejs') %>
+            </div>
+
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-11">
+                        <div class="card card-body my-5">
+
+                            <div class="card card-body m-3 description">
+
+                                <div class="m-2">
+                                    <span>Name: </span>
+                                    <span>
+                                        <%= labour.name %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Bangla Name: </span>
+                                    <span>
+                                        <%= labour.banglaName %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Phone: </span>
+                                    <span>
+                                        <%= labour.phone %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Village: </span>
+                                    <span>
+                                        <%= labour.address.village %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Thana: </span>
+                                    <span>
+                                        <%= labour.address.thana %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>District: </span>
+                                    <span>
+                                        <%= labour.address.district %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Debit: </span>
+                                    <span class="text-danger">
+                                        <%= labour.debit %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <span>Credit: </span>
+                                    <span class="text-success">
+                                        <%= labour.credit %>
+                                    </span>
+                                </div>
+
+                                <div class="m-2">
+                                    <button class="mt-3 mr-3 btn btn-sm btn-success" id="more-details">More Details</button>
+                                </div>
+
+
+                                <div class="transactions m-2" id="transactions">
+                                    <hr class="mt-5">
+
+                                    <form action="/dashboard/singleLabour/<%= labour._id %>" method="POST">
+
+                                        <div class="transaction-form">
+                                            <div class="form-group">
+                                                <label for="debit" class="mt-3">Debit</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control text-danger"
+                                                    name="debit" 
+                                                    id="debit"
+                                                >
+                                                <div class="invalid-feedback">
+                                                    
+                                                </div>
+                                            </div>
+    
+                                            <div class="form-group">
+                                                <label for="credit" class="mt-3">Credit</label>
+                                                <input 
+                                                    type="text" 
+                                                    class="form-control text-success"
+                                                    name="credit" 
+                                                    id="credit"
+                                                >
+                                                <div class="invalid-feedback">
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="add-transaction mt-3">
+                                            <button class="btn btn-success mt-3 btn-sm">Add Transaction</button>
+                                        </div>
+                                    </form>
+
+                                    <hr class="my-5">
+
+                                    <div class="all-transactions">
+
+                                        <% if(labour.transactions.length === 0){ %>
+                                            <div class="text-center text-muted">
+                                                <p>There is no transactions available rigth now</p>
+                                            </div>
+                                        <% }else{ %>
+                                            <% let id = 1 %>
+                                            
+                                            <div style="overflow-x:auto;">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th>তারিখ</th>
+                                                            <th>খরচ</th>
+															<th>জমা</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <div class="col-sm-3" style=" width: 200px;">
+                                                            <% for (let trans of labour.transactions.reverse()){ %>
+                                                                <tr scope="row">
+                                                                    <th scope="row"><%= id %></th>
+                                                                    <td><%= trans.time %></td>
+                                                                    <td class="text-danger"><%= trans.debit %></td>
+                                                                    <td class="text-success"><%= trans.credit %></td>
+                                                                    <% id++ %>
+                                                                </tr>
+                                                            <% } %>
+                                                        </div>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('../../../partials/footer.ejs') %>
+    </body>
+</html>

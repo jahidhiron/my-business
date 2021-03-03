@@ -1,0 +1,58 @@
+<%- include('../../partials/head.ejs') %>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <%- include('../../partials/sidebar.ejs') %>
+        </div>
+
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-11">
+                    <div class="card card-body my-5">
+                        <h4 class="mt-3 mb-4">
+                            <%= title.split('|')[0] %>
+                        </h4>
+
+                        <% if(tagda[0].transactions.length === 0){ %>
+                            <div class="text-center text-muted">
+                                <p>There is no tagda available rigth now</p>
+                            </div>
+                        <% }else{ %>
+                            <% let id = 1 %>
+                            <div style="overflow-x:auto;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Date</th>
+                                            <th>Area</th>
+                                            <th>Cash</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for (let t of tagda[0].transactions.reverse()){ %>
+                                            <div class="col-sm-3" style=" width: 200px;">
+                                                <tr scope="row">
+                                                    <td scope="row"><%= id %></td>
+                                                    <td><%= t.date %></td>
+                                                    <td><%= t.area %></td>
+                                                    <td><%= t.cash %></td>
+                                                    <% id++ %>
+                                                </tr>
+                                            </div>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../../partials/footer.ejs') %>
+</body>
+</html>

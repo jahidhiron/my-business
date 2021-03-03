@@ -1,0 +1,39 @@
+<div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    
+        <% if(isLoggedIn){ %>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/dashboard/product">Product</a>
+            <a href="/dashboard/customer">Customer</a>
+            <a href="/dashboard/sell">Sell</a>
+            <a href="/dashboard/productRecieve">Product Recieve</a>
+            <a href="/dashboard/onCash">On Cash</a>
+            <a href="/dashboard/cost">Cost</a>
+            <a href="/dashboard/tagda">Tagda</a>
+            <hr>
+            
+            <a href="/dashboard/paddyTrader">Paddy Trader</a>
+            <a href="/dashboard/paddyStock">Paddy Stock</a>
+            <a href="/dashboard/riceStock">Rice Stock</a>
+            <a href="/dashboard/otherStock">Other Stock</a>
+            <hr>
+
+            <a href="/dashboard/bagTrader">Bag Trader</a>
+            <a href="/dashboard/bagStock">Bag Stock</a>
+            <hr>
+
+            <a href="/dashboard/staff">Staff</a>
+            <a href="/dashboard/labour">Labour</a>
+            <a href="/dashboard/edit-profile">Profile</a>
+            <hr>
+
+            <a href="/dashboard/calculation">Calculation</a>
+            <hr>
+            
+            <a href="/dashboard/setting %>">Change Password</a>
+            <a href="/auth/logout" class="mb-3">Logout</a>
+        <% }else{ %>
+            <a href="/auth/login">Login</a>
+            <a href="/auth/signup">Signup</a>
+        <% } %>
+</div>

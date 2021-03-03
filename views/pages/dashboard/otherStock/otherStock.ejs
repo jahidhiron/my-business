@@ -1,0 +1,78 @@
+<%- include('../../../partials/head.ejs') %>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <%- include('../../../partials/sidebar.ejs') %>
+        </div>
+
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-11">
+                    <div class="card card-body my-5">
+                        <div class="text-muted" style="margin: right;">
+                            <a href="/dashboard/newOtherStock" class="btn btn-success btn-sm mb-4">Create New Other Stock</a>
+                        </div>
+
+                        <h4 class="mt-3 mb-4">
+                            <%= title.split('|')[0] %>
+                        </h4>
+
+                        <% if(otherStock.length === 0){ %>
+                            <div class="text-center text-muted">
+                                <p>There is no stock available rigth now</p>
+                            </div>
+                        <% }else{ %>
+                            <% let id = 1 %>
+                            <div style="overflow-x:auto;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>নাম</th>
+                                            <th>গড় দাম</th>
+                                            <th>মোট ব্যাগ</th>
+                                            <th>মোট ওজন</th>
+                                            <th>মোট দাম</th>
+                                            <th>Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for (let o of otherStock){ %>
+                                            <div class="col-sm-3" style=" width: 200px;">
+                                                <% let avgPrice = parseFloat(o.avgPrice) %>
+                                                <% avgPrice = avgPrice.toFixed(2) %>
+
+                                                <% let netPrice = parseFloat(o.netPrice) %>
+                                                <% netPrice = netPrice.toFixed(2) %>
+
+                                                <% let weight1 = parseInt(o.totalWeight) %>
+                                                <% let weight2 = (o.totalWeight - parseInt(o.totalWeight)) * 40 %>
+                                                <% weight2 = weight2.toFixed(2) %>
+
+                                                <tr scope="row">
+                                                    <th scope="row"><%= id %></th>
+                                                    <td><%= o.name %></td>
+                                                    <td><%= avgPrice + ' tk' %></td>
+                                                    <td><%= o.totalQuantity + ' bags' %></td>
+                                                    <td><%= weight1 + 'mon' + ' ' + weight2 + 'kg' %></td>
+                                                    <td><%= netPrice + ' tk' %></td>
+                                                    <td><a href="/dashboard/singleOtherStock/<%= o._id %>" target="_blank" >details</a></td>
+                                                    <% id++ %>
+                                                </tr>
+                                            </div>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../../../partials/footer.ejs') %>
+</body>
+</html>
